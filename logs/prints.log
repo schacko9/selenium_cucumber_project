@@ -1,0 +1,19 @@
+11:54:57.449 [main] INFO  options.LoginDefintion - Driver is Initialized
+11:55:32.065 [main] INFO  options.LoginDefintion - Navigated to Home Page
+11:55:35.685 [main] INFO  options.LoginDefintion - Landed on Sign-in Page
+11:55:37.623 [main] INFO  options.LoginDefintion - Logged In
+11:55:38.728 [main] INFO  options.LoginDefintion - Forgot Password
+11:55:38.826 [main] INFO  options.LoginDefintion - Driver Closed
+11:55:42.758 [main] INFO  options.LoginDefintion - Driver is Initialized
+11:56:12.200 [main] INFO  options.LoginDefintion - Navigated to Home Page
+11:56:16.399 [main] INFO  options.LoginDefintion - Landed on Sign-in Page
+11:56:18.187 [main] INFO  options.LoginDefintion - Logged In
+11:56:19.296 [main] INFO  options.LoginDefintion - Forgot Password
+11:56:19.886 [main] INFO  options.LoginDefintion - Driver Closed
+11:56:23.769 [main] INFO  options.LoginDefintion - Driver is Initialized
+11:57:26.738 [main] INFO  options.LoginDefintion - Navigated to Home Page
+11:57:26.891 [main] INFO  options.LoginDefintion - Title is Correct
+11:57:27.013 [main] INFO  options.LoginDefintion - Driver Closed
+11:57:31.479 [main] INFO  options.LoginDefintion - Driver is Initialized
+11:58:09.983 [main] INFO  options.LoginDefintion - Navigated to Home Page
+11:58:10.390 [main] INFO  options.LoginDefintion - Driver Closed
