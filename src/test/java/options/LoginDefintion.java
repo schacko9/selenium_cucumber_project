@@ -51,22 +51,22 @@ public class LoginDefintion extends base{
 		}
 		
 		land.getSignin();
+		
 		log.info("Landed on Sign-in Page");
-
 	}
 	
 	
 	@When("User enters {string} and {string} and logs in")
 	public void user_enters_username_and_password_and_logs_in(String Username, String Password) throws Throwable {
 		
-		LoginPage login = new LoginPage(driver); 					// Get Login Page from Landing Page Page Object
-		login.getEmail().sendKeys(Username);		 			// Using Login Page Object to give email
-		login.getPassword().sendKeys(Password);	     			// Using Login Page Object to give password
+		LoginPage login = new LoginPage(driver); 										// Get Login Page from Landing Page Page Object
+		login.getEmail().sendKeys(Username);		 									// Using Login Page Object to give email
+		login.getPassword().sendKeys(Password);	     									// Using Login Page Object to give password
 		
 		Thread.sleep(1000);
 		login.getLogin().click();
+		
 		log.info("Logged In");
-
 	}
 	
 	@When("Verify that {string} is successfully reset password")
@@ -78,6 +78,7 @@ public class LoginDefintion extends base{
 		login.forgotPassword().click();
 		forgot.getEmail().sendKeys(Username);
 		forgot.sendMeInstructions().click();
+		
 		log.info("Forgot Password");
 	}
 
@@ -85,8 +86,11 @@ public class LoginDefintion extends base{
 	@When("Title is Validated")
     public void title_is_validated() throws Throwable {
 		
-		LandingPage land = new LandingPage(driver);
-		// Compare the text from the browser with actual text.- Error..
+		LandingPage land = new LandingPage(driver);										
+		if(land.getPopupSize()>0)
+		{
+			land.getPopup().click();
+		}
 		
 		try {
 			Assert.assertEquals(land.getTitle().getText(), "FEATURED COURSES");     	// Correct Assertion 
@@ -100,10 +104,12 @@ public class LoginDefintion extends base{
 
     @When("Navigaton Bar is Validated")
     public void navigaton_bar_is_validated() throws Throwable {
-    	// One is inheritance
-		// Creating object to that class and invoke methods of it
 		LandingPage land = new LandingPage(driver);
-	
+		if(land.getPopupSize()>0)
+		{
+			land.getPopup().click();
+		}
+		
 	    Assert.assertTrue(land.getNavigationBar().isDisplayed());						// Compare the text from the browser with actual text.
     }
     
@@ -112,7 +118,6 @@ public class LoginDefintion extends base{
     public void close_browsers() throws Throwable {
 		driver.quit();	
 		log.info("Driver Closed");
-
 	}
     
 }
