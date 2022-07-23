@@ -2,56 +2,66 @@ package pageObjects;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+import resources.base;
+
+public class LandingPage extends base{
 	
-	// Global Variable
 	public WebDriver driver;
 	
-	By signin = By.cssSelector("a[href*='sign_in']");
-	By title = By.cssSelector(".text-center>h2");
-	By NavBar = By.cssSelector(".nav.navbar-nav.navbar-right>li>a");
-	By popup = By.xpath("//button[text()='NO THANKS']");
+	@FindBy(css="a[href*='sign_in']") WebElement signin;
+	@FindBy(css=".text-center>h2") WebElement title;
+	@FindBy(css=".nav.navbar-nav.navbar-right>li>a") WebElement NavBar;
+	@FindBy(css="[href*='password/new/index.php']") WebElement forgotPassword;
+	@FindBy(xpath="//button[contains(text(), 'NO THANKS')]") List<WebElement> popupSize;
+	@FindBy(xpath="//button[contains(text(), 'NO THANKS')]") WebElement popup;
 
 
 	
 	public LandingPage(WebDriver driver) {
 		
 		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
 	
 	
-	public LoginPage getSignin()
-	{
-		driver.findElement(signin).click();
+	public LoginPage getSignin(){
+		click(signin);
 		LoginPage login = new LoginPage(driver); 
 		return login;
 	}
 	
 
-	public WebElement getNavigationBar()
-	{
-		return driver.findElement(NavBar);
+	public WebElement getNavigationBar(){
+		return NavBar;
 	}
 	
 	
-	public WebElement getTitle()
-	{
-		return driver.findElement(title);
+	public String getTitle(){
+		return get_Text(title);
 	}
 	
-	public int getPopupSize()
-	{
-		return driver.findElements(popup).size();
+	public int getPopupSize(){
+		return get_Size(popupSize);
 	}
 	
-	public WebElement getPopup()
-	{
-		return driver.findElement(popup);
+	public void getPopup(){
+		try{
+			click(popup);
+			System.out.println("");
+			System.out.println("***********"+" Popup Closed" +" ***********");
+			System.out.println("");
+		}
+		catch(Exception e){
+			System.out.println("");
+			System.out.println("***********"+" Popup not Clickable, "+" ***********");
+			System.out.println("");
+		}
 	}
 	
 }

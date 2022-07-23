@@ -1,6 +1,5 @@
 package options;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.testng.Assert;
 
 import io.cucumber.junit.Cucumber;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,7 +25,6 @@ public class LoginDefintion extends base{
 	
 	@Given("Intitilize the browser with {string}")
 	public void intitilize_the_browser_with(String string) throws IOException {
-		
 		driver = initializeDriver(string);	
 		log.info("Driver is Initialized");
 	}
@@ -35,7 +32,6 @@ public class LoginDefintion extends base{
 	
 	@Given("Navigate to {string} site")
 	public void navigate_to_site(String string) {
-		
 		driver.get(string);
 		log.info("Navigated to Home Page");
 	}
@@ -45,13 +41,11 @@ public class LoginDefintion extends base{
 	public void click_on_login_link_in_home_page_to_land_on_sign_in_page() throws Throwable {
 		
 		LandingPage land = new LandingPage(driver);
-		if(land.getPopupSize()>0)
-		{
-			land.getPopup().click();
+		if(land.getPopupSize()>0){
+			land.getPopup();
 		}
 		
 		land.getSignin();
-		
 		log.info("Landed on Sign-in Page");
 	}
 	
@@ -60,11 +54,9 @@ public class LoginDefintion extends base{
 	public void user_enters_username_and_password_and_logs_in(String Username, String Password) throws Throwable {
 		
 		LoginPage login = new LoginPage(driver); 										// Get Login Page from Landing Page Page Object
-		login.getEmail().sendKeys(Username);		 									// Using Login Page Object to give email
-		login.getPassword().sendKeys(Password);	     									// Using Login Page Object to give password
-		
-		Thread.sleep(1000);
-		login.getLogin().click();
+		login.getEmail(Username)					 									// Using Login Page Object to give email
+			 .getPassword(Password)			     										// Using Login Page Object to give password
+			 .getLogin();
 		
 		log.info("Logged In");
 	}
@@ -75,9 +67,9 @@ public class LoginDefintion extends base{
 		LoginPage login = new LoginPage(driver); 
 		ForgotPassword forgot = new ForgotPassword(driver);	
 		
-		login.forgotPassword().click();
-		forgot.getEmail().sendKeys(Username);
-		forgot.sendMeInstructions().click();
+		login.forgotPassword();
+		forgot.getEmail(Username);
+		forgot.sendMeInstructions();
 		
 		log.info("Forgot Password");
 	}
@@ -85,32 +77,34 @@ public class LoginDefintion extends base{
 	
 	@When("Title is Validated")
     public void title_is_validated() throws Throwable {
-		
-		LandingPage land = new LandingPage(driver);										
-		if(land.getPopupSize()>0)
-		{
-			land.getPopup().click();
+		LandingPage land = new LandingPage(driver);
+		if(land.getPopupSize()>0){
+			land.getPopup();
 		}
 		
 		try {
-			Assert.assertEquals(land.getTitle().getText(), "FEATURED COURSES");     	// Correct Assertion 
-			log.info("Title is Correct");
+			String title = land.getTitle();
+			Assert.assertEquals(title, "FEATURED COURSES");     						// Correct Assertion				
+			
+			log.info("AppTitle: Test Complete");
 		}
 		catch(Exception e){
-			log.info("Title is Wrong");
+			log.info("AppTitle: Test Failed");
 		}
+		
+		
     }
 
 
     @When("Navigaton Bar is Validated")
     public void navigaton_bar_is_validated() throws Throwable {
-		LandingPage land = new LandingPage(driver);
-		if(land.getPopupSize()>0)
-		{
-			land.getPopup().click();
+    	LandingPage land = new LandingPage(driver);
+		if(land.getPopupSize()>0){
+			land.getPopup();
 		}
 		
 	    Assert.assertTrue(land.getNavigationBar().isDisplayed());						// Compare the text from the browser with actual text.
+	    	log.info("AppNavBar: Test completed");
     }
     
 
